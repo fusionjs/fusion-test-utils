@@ -11,6 +11,7 @@ function mockContext(request) {
   /*
    * Copied from https://github.com/koajs/koa/blob/master/test/helpers/context.js 
    * Copyright (c) 2016 Koa contributors
+   * MIT License
    * https://github.com/koajs/koa/blob/master/LICENSE
    */
   const socket = new Stream.Duplex();
