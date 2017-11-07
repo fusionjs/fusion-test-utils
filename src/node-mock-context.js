@@ -8,7 +8,7 @@ function mockContext(request) {
   let req = httpMocks.createRequest(Object.assign({url: '/'}, request));
   let res = httpMocks.createResponse();
 
-  /*
+  /**
    * Copied from https://github.com/koajs/koa/blob/master/test/helpers/context.js 
    * Copyright (c) 2016 Koa contributors
    * MIT License
