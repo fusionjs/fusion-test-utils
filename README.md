@@ -19,7 +19,7 @@ let ctx = mockContext();
 await app.simulate(ctx);
 // do assertions on ctx
 
-let ctx = mockContext({path: '/'}); // arguments get merged into req object
+let ctx = mockContext({path: '/'}); // argument get merged into mock req object
 await app.simulate(ctx);
 // do assertions on ctx
 ```
