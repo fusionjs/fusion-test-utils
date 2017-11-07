@@ -8,7 +8,11 @@ function mockContext(request) {
   let req = httpMocks.createRequest(Object.assign({url: '/'}, request));
   let res = httpMocks.createResponse();
 
-  // Taken from https://github.com/koajs/koa/blob/master/test/helpers/context.js
+  /*
+   * Copied from https://github.com/koajs/koa/blob/master/test/helpers/context.js 
+   * Copyright (c) 2016 Koa contributors
+   * https://github.com/koajs/koa/blob/master/LICENSE
+   */
   const socket = new Stream.Duplex();
   req = Object.assign({headers: {}, socket}, Stream.Readable.prototype, req);
   res = Object.assign({_headers: {}, socket}, Stream.Writable.prototype, res);
