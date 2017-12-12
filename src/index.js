@@ -16,18 +16,16 @@ export function render(app, url, options = {}) {
   return simulate(app, ctx);
 }
 
-let describe, it;
+let test;
 if (typeof jest !== 'undefined') {
-  /* eslint-env jest, node */
-  describe = global.describe;
-  it = global.it;
+  /* eslint-env node */
+  test = (...args) => global.it(...args);
 } else {
   const notSupported = () => {
     throw new Error(
-      'Can’t import test app helpers when not using the test-app target.'
+      'Can’t import BDD syntax when not using the test-app target.'
     );
   };
-  it = notSupported;
-  describe = notSupported;
+  test = notSupported;
 }
-export {describe, it};
+export {test};
