@@ -15,3 +15,13 @@ export function render(app, url, options = {}) {
   const ctx = renderContext(url, options);
   return simulate(app, ctx);
 }
+
+let describe = null;
+let it = null;
+
+if (typeof jest !== 'undefined') {
+  /* eslint-env jest, node */
+  describe = global.describe;
+  it = global.it;
+}
+export {describe, it};
