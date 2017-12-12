@@ -18,15 +18,13 @@ export function render(app, url, options = {}) {
 }
 
 let test;
-if (typeof jest !== 'undefined') {
+if (typeof global.jest !== 'undefined') {
   /* eslint-env node */
   test = (description, callback, ...rest) =>
     global.it(description, () => callback(assert), ...rest);
 } else {
   const notSupported = () => {
-    throw new Error(
-      'Can’t import BDD syntax when not using the test-app target.'
-    );
+    throw new Error('Can’t import test() when not using the test-app target.');
   };
   test = notSupported;
 }
