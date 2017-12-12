@@ -16,12 +16,18 @@ export function render(app, url, options = {}) {
   return simulate(app, ctx);
 }
 
-let describe = null;
-let it = null;
-
+let describe, it;
 if (typeof jest !== 'undefined') {
   /* eslint-env jest, node */
   describe = global.describe;
   it = global.it;
+} else {
+  const notSupported = () => {
+    throw new Error(
+      'Can’t import test app helpers when not using the test-app target.'
+    );
+  };
+  it = notSupported;
+  describe = notSupported;
 }
 export {describe, it};
