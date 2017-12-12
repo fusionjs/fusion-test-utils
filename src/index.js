@@ -1,5 +1,6 @@
 import {mockContext, renderContext} from './mock-context.js';
 import simulate from './simulate';
+import assert from 'assert';
 
 export function request(app, url, options = {}) {
   if (__BROWSER__) {
@@ -19,7 +20,8 @@ export function render(app, url, options = {}) {
 let test;
 if (typeof jest !== 'undefined') {
   /* eslint-env node */
-  test = (...args) => global.it(...args);
+  test = (description, callback, ...rest) =>
+    global.it(description, () => callback(assert), ...rest);
 } else {
   const notSupported = () => {
     throw new Error(
