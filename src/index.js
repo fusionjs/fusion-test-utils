@@ -1,18 +1,19 @@
 //@flow
 
-import FusionApp from 'fusion-core';
-
 import assert from 'assert';
+
+import FusionApp from 'fusion-core';
+import type {FusionPlugin} from 'fusion-core';
+
 import {mockContext, renderContext} from './mock-context.js';
 import simulate from './simulate';
 
 declare var __BROWSER__: boolean;
 
-export function request(
-  app: FusionApp,
+const request = (app: FusionApp) => (
   url: string,
   options: * = {}
-): Promise<*> {
+): Promise<*> => {
   if (__BROWSER__) {
     throw new Error(
       '[fusion-test-utils] Request api not support from the browser. Please use `render` instead'
@@ -20,15 +21,24 @@ export function request(
   }
   const ctx = mockContext(url, options);
   return simulate(app, ctx);
-}
+};
 
-export function render(
-  app: FusionApp,
+const render = (app: FusionApp) => (
   url: string,
   options: * = {}
-): Promise<*> {
+): Promise<*> => {
   const ctx = renderContext(url, options);
   return simulate(app, ctx);
+};
+
+export function registerAsTest(app: FusionApp, testPlugin: FusionPlugin<*, *>) {
+  app.register(testPlugin);
+  app.resolve();
+
+  return {
+    request: request(app),
+    render: render(app),
+  };
 }
 
 // Export test runner functions from jest
