@@ -31,8 +31,13 @@ const render = (app: FusionApp) => (
   return simulate(app, ctx);
 };
 
-export function registerAsTest(app: FusionApp, testPlugin: FusionPlugin<*, *>) {
-  app.register(testPlugin);
+export function registerAsTest(
+  app: FusionApp,
+  testPlugin?: FusionPlugin<*, *>
+) {
+  if (testPlugin) {
+    app.register(testPlugin);
+  }
   app.resolve();
 
   return {
