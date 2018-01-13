@@ -1,5 +1,6 @@
 import test from 'tape-cup';
-import App from 'fusion-core';
+import App, {withDependencies} from 'fusion-core';
+import {createToken} from 'fusion-tokens';
 
 import {registerAsTest, test as exportedTest} from '../index.js';
 
@@ -56,6 +57,36 @@ test('simulate non-render request', async t => {
     t.ok(!flags.render, 'did not trigger ssr');
     t.end();
   }
+});
+
+test('simulate with plugin dependencies', async t => {
+  // Dependency-less plugin
+  const msgProviderPluginToken = createToken('MessageProviderPluginToken');
+  const msgProviderPlugin = {msg: 'it works!'};
+
+  // Register plugins
+  const app = new App('hi', el => el);
+  app.register(msgProviderPluginToken, () => msgProviderPlugin);
+
+  t.plan(3);
+  registerAsTest(
+    app,
+    withDependencies({
+      msgProvider: msgProviderPluginToken,
+    })(deps => {
+      t.ok(deps, 'some dependencies successfully resolved');
+      t.ok(deps.msgProvider, 'requested dependency successfully resolved');
+      const {msgProvider} = deps;
+      t.equal(
+        msgProvider.msg,
+        msgProviderPlugin.msg,
+        'dependency payload is correct'
+      );
+      return 'yay!';
+    })
+  );
+
+  t.end();
 });
 
 test('test throws when not using test-app', async t => {
