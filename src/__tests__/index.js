@@ -59,14 +59,17 @@ test('simulate non-render request', async t => {
   }
 });
 
-test('simulate with plugin dependencies', async t => {
+test('use simulator with fixture and plugin dependencies', async t => {
   // Dependency-less plugin
   const msgProviderPluginToken = createToken('MessageProviderPluginToken');
   const msgProviderPlugin = {msg: 'it works!'};
-
-  // Register plugins
-  const app = new App('hi', el => el);
-  app.register(msgProviderPluginToken, () => msgProviderPlugin);
+  function getTestFixture() {
+    // Register plugins
+    const app = new App('hi', el => el);
+    app.register(msgProviderPluginToken, () => msgProviderPlugin);
+    return app;
+  }
+  const app = getTestFixture();
 
   t.plan(3);
   registerAsTest(
