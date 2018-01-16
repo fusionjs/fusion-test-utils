@@ -2,7 +2,7 @@ import test from 'tape-cup';
 import App, {withDependencies} from 'fusion-core';
 import {createToken} from 'fusion-tokens';
 
-import {registerAsTest, test as exportedTest} from '../index.js';
+import {getSimulator, test as exportedTest} from '../index.js';
 
 test('simulate render request', async t => {
   const flags = {render: false};
@@ -11,7 +11,7 @@ test('simulate render request', async t => {
     flags.render = true;
   };
   const app = new App(element, renderFn);
-  var testApp = registerAsTest(app);
+  var testApp = getSimulator(app);
   const ctx = await testApp.render('/');
   t.ok(flags.render, 'triggered ssr');
   t.ok(ctx.element, 'sets ctx.element');
@@ -24,7 +24,7 @@ test('simulate multi-render requests', async t => {
     counter.renderCount++;
   };
   const app = new App('hello', renderFn);
-  var testApp = registerAsTest(app);
+  var testApp = getSimulator(app);
 
   for (var i = 1; i <= 5; i++) {
     await testApp.render('/');
@@ -41,7 +41,7 @@ test('simulate non-render request', async t => {
     flags.render = true;
   };
   const app = new App(element, renderFn);
-  const testApp = registerAsTest(app);
+  const testApp = getSimulator(app);
   if (__BROWSER__) {
     try {
       testApp.request('/');
@@ -72,7 +72,7 @@ test('use simulator with fixture and plugin dependencies', async t => {
   const app = getTestFixture();
 
   t.plan(3);
-  registerAsTest(
+  getSimulator(
     app,
     withDependencies({
       msgProvider: msgProviderPluginToken,
