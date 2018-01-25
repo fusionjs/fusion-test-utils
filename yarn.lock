@@ -2812,9 +2812,9 @@ functional-red-black-tree@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/functional-red-black-tree/-/functional-red-black-tree-1.0.1.tgz#1b0ab3bd553b2a0d6399d29c0e3ea0b252078327"
 
-fusion-core@0.3.0-2:
-  version "0.3.0-2"
-  resolved "https://registry.yarnpkg.com/fusion-core/-/fusion-core-0.3.0-2.tgz#cbbe19f688d00b8a2ee948293e6098dbd1a10988"
+fusion-core@0.3.0-5:
+  version "0.3.0-5"
+  resolved "https://registry.yarnpkg.com/fusion-core/-/fusion-core-0.3.0-5.tgz#b6ad6ea3f7dcdb6517dc31214f64856727c5800c"
   dependencies:
     koa "^2.3.0"
     koa-compose "^4.0.0"
@@ -3774,8 +3774,8 @@ jsbn@~0.1.0:
   resolved "https://registry.yarnpkg.com/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
 
 jsdom@^11.5.1:
-  version "11.6.0"
-  resolved "https://registry.yarnpkg.com/jsdom/-/jsdom-11.6.0.tgz#7334781595ee8bdeea9742fc33fab5cdad6d195f"
+  version "11.6.1"
+  resolved "https://registry.yarnpkg.com/jsdom/-/jsdom-11.6.1.tgz#43fffc10072597a8ee9680cba46900d9e4dbeba2"
   dependencies:
     abab "^1.0.4"
     acorn "^5.3.0"
@@ -5548,8 +5548,8 @@ through@^2.3.6, through@~2.3.4, through@~2.3.8:
   resolved "https://registry.yarnpkg.com/through/-/through-2.3.8.tgz#0dd4c9ffaabc357960b1b724115d7e0e86a2e1f5"
 
 timers-browserify@^2.0.4:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/timers-browserify/-/timers-browserify-2.0.5.tgz#04878fb12a155a159c9d1e59faa1f77bf4ecc44c"
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/timers-browserify/-/timers-browserify-2.0.6.tgz#241e76927d9ca05f4d959819022f5b3664b64bae"
   dependencies:
     setimmediate "^1.0.4"
 
