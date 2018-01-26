@@ -44,6 +44,7 @@ export function mockContext(url: string, options: *): Context {
   res.setHeader = (k, v) => (res._headers[k.toLowerCase()] = v);
   res.removeHeader = k => delete res._headers[k.toLowerCase()];
 
+  //$FlowFixMe
   return new Koa().createContext(req, res);
 }
 
