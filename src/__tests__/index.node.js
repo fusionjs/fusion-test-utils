@@ -56,4 +56,3 @@ test('status is set if ctx.status is updated in render', async t => {
   t.equals(ctx.status, 500, 'status is set');
   t.end();
 });
-
