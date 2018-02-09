@@ -6,7 +6,7 @@
 
 import test from 'tape-cup';
 import App, {createPlugin} from 'fusion-core';
-import {createToken} from 'fusion-tokens';
+import {createToken} from 'fusion-core';
 
 import {getSimulator, test as exportedTest} from '../index.js';
 
