@@ -124,14 +124,13 @@ test('test throws when not using test-app', async t => {
 });
 
 test('getService - returns service as expected, with no dependencies', async t => {
-  const app = new App('hi', el => el);
   const simplePlugin = createPlugin({
     provides() {
       return {meaningOfLife: 42};
     },
   });
 
-  const service = getService(app, simplePlugin);
+  const service = getService(() => new App('hi', el => el), simplePlugin);
   t.ok(service);
   t.equal(service.meaningOfLife, 42);
 
@@ -152,10 +151,11 @@ test('getService - returns service as expected, with dependencies', async t => {
     },
   });
 
-  const app = new App('hi', el => el);
-  app.register(meaningOfLifeToken, meaningOfLifePlugin);
-
-  const service = getService(app, simplePlugin);
+  const service = getService(() => {
+    const app = new App('hi', el => el);
+    app.register(meaningOfLifeToken, meaningOfLifePlugin);
+    return app;
+  }, simplePlugin);
   t.ok(service);
   t.equal(service.meaningOfLife, 42);
 
@@ -170,9 +170,6 @@ test('getService - throws as expected due to missing dependency', async t => {
       return {meaningOfLife: meaning};
     },
   });
-  const app = new App('hi', el => el);
-
-  t.throws(() => getService(app, simplePlugin));
-
+  t.throws(() => getService(() => new App('hi', el => el), simplePlugin));
   t.end();
 });

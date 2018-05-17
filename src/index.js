@@ -43,9 +43,10 @@ export function getSimulator(
 }
 
 export function getService<TDeps, TService>(
-  app: FusionApp,
+  appCreator: () => FusionApp,
   plugin: FusionPlugin<TDeps, TService>
 ): TService {
+  const app = appCreator();
   const token: Token<TService> = createToken('service-helper');
 
   let extractedService = null;
@@ -58,14 +59,7 @@ export function getService<TDeps, TService>(
       },
     })
   );
-
-  try {
-    app.resolve();
-  } catch (err) {
-    throw new Error(
-      'Unable to resolve the provided FusionApp.  Has it already been resolved?'
-    );
-  }
+  app.resolve();
 
   if (!extractedService) {
     throw new Error('Provided plugin does not export a service');
