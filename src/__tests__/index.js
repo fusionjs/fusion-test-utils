@@ -18,8 +18,7 @@ test('simulate render request', async t => {
   const renderFn = () => {
     flags.render = true;
   };
-  const app = new App(element, renderFn);
-  var testApp = getSimulator(app);
+  var testApp = getSimulator(() => new App(element, renderFn));
   const ctx = await testApp.render('/');
   t.ok(flags.render, 'triggered ssr');
   t.ok(ctx.element, 'sets ctx.element');
@@ -31,8 +30,7 @@ test('simulate multi-render requests', async t => {
   const renderFn = () => {
     counter.renderCount++;
   };
-  const app = new App('hello', renderFn);
-  var testApp = getSimulator(app);
+  var testApp = getSimulator(() => new App('hello', renderFn));
 
   for (var i = 1; i <= 5; i++) {
     await testApp.render('/');
@@ -48,8 +46,7 @@ test('simulate non-render request', async t => {
   const renderFn = () => {
     flags.render = true;
   };
-  const app = new App(element, renderFn);
-  const testApp = getSimulator(app);
+  const testApp = getSimulator(() => new App(element, renderFn));
   if (__BROWSER__) {
     try {
       testApp.request('/');
@@ -86,7 +83,6 @@ test('use simulator with fixture and plugin dependencies', async t => {
     app.register(msgProviderPluginToken, msgProviderPlugin);
     return app;
   }
-  const app = getTestFixture();
 
   t.plan(3);
   let testPlugin: FusionPlugin<*, *> = createPlugin({
@@ -105,7 +101,7 @@ test('use simulator with fixture and plugin dependencies', async t => {
       return 'yay!';
     },
   });
-  getSimulator(app, testPlugin);
+  getSimulator(getTestFixture, testPlugin);
 
   t.end();
 });
