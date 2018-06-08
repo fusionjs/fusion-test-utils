@@ -13,7 +13,7 @@ import type {Context} from 'fusion-core';
 
 declare var __BROWSER__: boolean;
 
-export function mockContext(url: string, options: *): Context {
+export function mockContext(url: string, options: {body?: {[key: string]: any}}): Context {
   if (__BROWSER__) {
     const parsedUrl = {...parse(url)};
     const {path} = parsedUrl;
