@@ -65,6 +65,6 @@ test('body contains some message', async t => {
     body: {message: 'test'},
   });
   t.equals(ctx.status, 404, 'status is set');
-  t.equals(ctx.res.body.message, 'test', 'body is set');
+  t.equals(ctx.req.body.message, 'test', 'body is set');
   t.end();
 });
