@@ -78,7 +78,7 @@ type MockFunctionType<TArgs, TReturn> = () => $Call<
   ExtractArgsReturnType<TArgs, TReturn>,
   JestFnType
 >;
-type MatchSnapshotType = mixed => void;
+type MatchSnapshotType = (mixed, string) => void;
 type CallableAssertType = (
   assert: typeof assert & {matchSnapshot: MatchSnapshotType}
 ) => void | Promise<void>;
@@ -90,7 +90,7 @@ let mockFunction: MockFunctionType<*, *>, test: any;
 if (typeof it !== 'undefined') {
   // Surface snapshot testing
   // $FlowFixMe
-  assert.matchSnapshot = tree => expect(tree).toMatchSnapshot();
+  assert.matchSnapshot = (tree, snapshotName) => expect(tree).toMatchSnapshot(snapshotName);
 
   /* eslint-env node, jest */
   test = (description, callback, ...rest) =>
