@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`matchSnapshot 1`] = `
+exports[`matchSnapshot: snapshot name 1`] = `
 Object {
   "foo": "bar",
 }

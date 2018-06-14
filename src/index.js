@@ -90,7 +90,9 @@ let mockFunction: MockFunctionType<*, *>, test: any;
 if (typeof it !== 'undefined') {
   // Surface snapshot testing
   // $FlowFixMe
-  assert.matchSnapshot = (tree, snapshotName) => expect(tree).toMatchSnapshot(snapshotName);
+  assert.matchSnapshot = (tree, snapshotName) =>
+    // $FlowFixMe
+    expect(tree).toMatchSnapshot(snapshotName);
 
   /* eslint-env node, jest */
   test = (description, callback, ...rest) =>
