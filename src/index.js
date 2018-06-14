@@ -78,7 +78,7 @@ type MockFunctionType<TArgs, TReturn> = () => $Call<
   ExtractArgsReturnType<TArgs, TReturn>,
   JestFnType
 >;
-type MatchSnapshotType = (mixed, string) => void;
+type MatchSnapshotType = (mixed, ?string) => void;
 type CallableAssertType = (
   assert: typeof assert & {matchSnapshot: MatchSnapshotType}
 ) => void | Promise<void>;

@@ -17,5 +17,10 @@ test('function mocks', assert => {
 
 test('matchSnapshot', assert => {
   const myObj = {foo: 'bar'};
-  assert.matchSnapshot(myObj, 'snapshot name');
+  assert.matchSnapshot(myObj);
+});
+
+test('matchSnapshot with name', assert => {
+  const myObj = {foo: 'bar'};
+  assert.matchSnapshot(myObj, 'my snapshot name');
 });
