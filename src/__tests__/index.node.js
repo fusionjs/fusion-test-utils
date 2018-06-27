@@ -5,6 +5,7 @@
  *
  * @flow
  */
+/* globals global */
 
 import test from 'tape-cup';
 import App from 'fusion-core';
@@ -20,7 +21,7 @@ test('jsdom', async t => {
     },
   };
   const app = new App('el', () => 'hello');
-  const ctx = await getSimulator(app).render('/test');
+  await getSimulator(app).render('/test');
   t.equal(reconfigured, true);
   t.end();
   delete global.jsdom;
@@ -35,7 +36,7 @@ test('jsdom with empty string', async t => {
     },
   };
   const app = new App('el', () => 'hello');
-  const ctx = await getSimulator(app).render('');
+  await getSimulator(app).render('');
   t.equal(reconfigured, true);
   t.end();
   delete global.jsdom;
@@ -50,7 +51,7 @@ test('jsdom with /', async t => {
     },
   };
   const app = new App('el', () => 'hello');
-  const ctx = await getSimulator(app).render('/');
+  await getSimulator(app).render('/');
   t.equal(reconfigured, true);
   t.end();
   delete global.jsdom;
