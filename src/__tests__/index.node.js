@@ -11,6 +11,51 @@ import App from 'fusion-core';
 
 import {getSimulator} from '../index.js';
 
+test('jsdom', async t => {
+  let reconfigured = false;
+  global.jsdom = {
+    reconfigure: ({url}) => {
+      t.equal(url, 'http://localhost/test');
+      reconfigured = true;
+    },
+  };
+  const app = new App('el', () => 'hello');
+  const ctx = await getSimulator(app).render('/test');
+  t.equal(reconfigured, true);
+  t.end();
+  delete global.jsdom;
+});
+
+test('jsdom with empty string', async t => {
+  let reconfigured = false;
+  global.jsdom = {
+    reconfigure: ({url}) => {
+      t.equal(url, 'http://localhost/');
+      reconfigured = true;
+    },
+  };
+  const app = new App('el', () => 'hello');
+  const ctx = await getSimulator(app).render('');
+  t.equal(reconfigured, true);
+  t.end();
+  delete global.jsdom;
+});
+
+test('jsdom with /', async t => {
+  let reconfigured = false;
+  global.jsdom = {
+    reconfigure: ({url}) => {
+      t.equal(url, 'http://localhost/');
+      reconfigured = true;
+    },
+  };
+  const app = new App('el', () => 'hello');
+  const ctx = await getSimulator(app).render('/');
+  t.equal(reconfigured, true);
+  t.end();
+  delete global.jsdom;
+});
+
 test('status is 404 if ctx.body is never updated', async t => {
   const app = new App('el', el => el);
   const ctx = await getSimulator(app).request('/');
