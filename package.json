@@ -54,8 +54,7 @@
     "just-test": "node_modules/.bin/unitest --browser=dist-tests/browser.js --node=dist-tests/node.js",
     "test": "npm run build-test && npm run just-test",
     "cover": "npm run build-test && nyc npm run just-test",
-    "prepublish": "npm run transpile",
-    "flow": "flow check"
+    "prepublish": "npm run transpile"
   },
   "dependencies": {
     "assert": "^1.4.1",
