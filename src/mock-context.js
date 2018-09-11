@@ -61,6 +61,8 @@ export function mockContext(
 }
 
 export function renderContext(url: string, options: any = {}): Context {
-  options = Object.assign(options, {headers: Object.assign({accept: 'text/html'}, options.headers)});
+  options = Object.assign(options, {
+    headers: Object.assign({accept: 'text/html'}, options.headers),
+  });
   return mockContext(url, options);
 }

@@ -112,7 +112,7 @@ test('simulator accepts extra headers', async t => {
   const ctx = await simulator.render('/', {
     headers: {
       'x-header': 'value',
-    }
+    },
   });
 
   t.equal(ctx.request.headers['x-header'], 'value');
