@@ -67,22 +67,6 @@ test('simulate non-render request', async t => {
   }
 });
 
-test('simulator accepts extra headers', async t => {
-  if (__NODE__) {
-    const app = new App('hi', () => {});
-    const simulator = getSimulator(app);
-
-    const ctx = await simulator.render('/', {
-      headers: {
-        'x-header': 'value',
-      }
-    });
-
-    t.equal(ctx.request.headers['x-header'], 'value');
-  }
-  t.end();
-});
-
 test('use simulator with fixture and plugin dependencies', async t => {
   // Dependency-less plugin
   type MessageType = {
