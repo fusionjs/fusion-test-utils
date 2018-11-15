@@ -71,6 +71,20 @@ const sim = getSimulator(app);
 const logger = sim.getService(LoggerToken);
 ```
 
+#### `createRequestContext(url: String, options: ?Object) => ctx`
+
+Creates a mock context object.
+`url` - path for request
+`options` - optional object containing custom settings for the request
+`options.method` - the request method, e.g., GET, POST,
+`options.headers` - headers to be added to the request
+`options.body` - body for the request
+
+
+#### `createRenderContext(url: String, options: ?Object) => ctx`
+
+The same as `createRequestContext`, but defaults the `accept` header to `text/html` which will trigger a render of the application.
+
 #### `test(testName: String, executor: (assert) => {})`
 
 A block which executes a test case when using [fusion-cli](https://github.com/fusionjs/fusion-cli) as a test runner. The first argument is the name of the test, and the second argument is a function that executes your test code. The test case will receive a cross-environment assertion helper with all methods defined in the [assert module](https://nodejs.org/api/assert.html), as well as a `.matchSnapshot()` method.
