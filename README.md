@@ -47,7 +47,7 @@ Creates a simulator which exposes functionality to simulate requests and renders
 `app` - instance of a FusionApp
 `testPlugin` - optional plugin to make assertions on dependencies
 
-#### `getSimulator(...).request(url: String, options: ?Object)` => Promise<ctx>
+#### `getSimulator(...).request(url: String, options: ?Object)` => Promise<Context>
 
 Simulates a request through your application.
 `url` - path for request
@@ -56,7 +56,7 @@ Simulates a request through your application.
 `options.headers` - headers to be added to the request
 `options.body` - body for the request
 
-#### `getSimulator(...).render(url: String, options: ?Object)` => Promise<ctx>
+#### `getSimulator(...).render(url: String, options: ?Object)` => Promise<Context>
 
 This is the same as `request`, but defaults the `accept` header to `text/html` which will trigger a render of your application.
 
@@ -71,7 +71,7 @@ const sim = getSimulator(app);
 const logger = sim.getService(LoggerToken);
 ```
 
-#### `createRequestContext(url: String, options: ?Object) => ctx`
+#### `createRequestContext(url: String, options: ?Object) => Context`
 
 Creates a mock context object.
 `url` - path for request
@@ -81,7 +81,7 @@ Creates a mock context object.
 `options.body` - body for the request
 
 
-#### `createRenderContext(url: String, options: ?Object) => ctx`
+#### `createRenderContext(url: String, options: ?Object) => Context`
 
 The same as `createRequestContext`, but defaults the `accept` header to `text/html` which will trigger a render of the application.
 
