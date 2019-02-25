@@ -19,6 +19,13 @@ type ContextOptions = {|
   method?: string,
 |};
 
+const outHeadersKey = __BROWSER__
+  ? ''
+  : Object.getOwnPropertySymbols(
+      // $FlowFixMe
+      new (require('http')).OutgoingMessage()
+    ).filter(sym => /outHeadersKey/.test(sym.toString()))[0];
+
 const defaultContextOptions: ContextOptions = {
   headers: {},
 };
@@ -41,6 +48,7 @@ export function createRequestContext(
   const Koa = require('koa');
   let req = httpMocks.createRequest({url, ...options});
   let res = httpMocks.createResponse();
+  res[outHeadersKey] = null; // required for headers to work correctly in Node >10
 
   /**
    * Copied from https://github.com/koajs/koa/blob/master/test/helpers/context.js
