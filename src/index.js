@@ -29,10 +29,12 @@ export type Simulator = {
   render: $Call<ExtractFusionAppReturnType, typeof render>,
   getService<T>(token: Token<T>): T,
 };
-export function getSimulator(
-  app: FusionApp,
-  testPlugin?: FusionPlugin<*, *>
+export function getSimulator<TDeps, TService>(
+  appCreator: () => FusionApp,
+  testPlugin?: FusionPlugin<TDeps, TService>
 ): Simulator {
+  const app = appCreator();
+
   if (testPlugin) {
     app.register(testPlugin);
   }
